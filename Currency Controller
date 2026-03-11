@@ -1,0 +1,52 @@
+#include <iostream>
+using namespace std;
+
+//euro exchange rate from USD = 0.92
+//pound exchange rate from USD = 0.78
+//canadian exchange rate from USD = 1.36
+//japanese yen exchange rate from USD = 161.64
+
+//adding void means that it will not take any input
+
+int main()
+{
+    float input;
+    float outcome;
+    float num;
+
+    cout << "Currency Converter\n";
+    cout << "(1) From US Dollar($) to Euro(€)\n";
+    cout << "(2) Fron US Dollar($) to Pound Sterling(£)\n";
+    cout << "(3) From US Dollar($) to Canadian Dollar(CAD$)\n";
+    cout << "(4) From US Dollar($) to Japanese Yen(¥)\n";
+
+    cout << "Enter the number of your preffered conversion: \n";
+    cin >> input;
+
+    cout << "Enter the (USD) amount you want to convert to the foregn currency: ";
+    cin >> num;
+
+
+    if (input == 1) {
+        outcome = num * 0.92;
+        cout << input << "$ (USD) will be " << outcome << "€ (euro)";
+    }
+    else if (input == 2){
+        outcome = num * 0.78;
+        cout << input << "$ (USD) will be " << outcome << "£ (pound sterling)";
+    }
+    else if (input == 3){
+        outcome = num * 1.36;
+        cout << input << "$ (USD) will be " << outcome << "CAD$ (Canadian Dollard)";
+    }
+    else if (input == 4){
+        outcome = num * 161.64;
+        cout << input << "$ (USD) will be " << outcome << "¥ (Japanese Yen)";
+    }
+    else{
+        cout << "Try again...";
+    }
+    
+
+    return 0;
+}
