@@ -1,0 +1,106 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+
+using namespace std;
+
+// Total number of rooms available
+const int TOTAL_ROOMS = 10;
+
+// Function to book a room
+void book(vector<string>& nameL, vector<int>& roomNum, vector<string>& reservations) {
+    string name;
+    // Check if rooms are available
+    if (reservations.size() >= TOTAL_ROOMS) {
+        cout << "Sorry, all rooms are fully booked." << endl;
+        return;
+    }
+
+    cout << "Hotel Reservation System\n";
+    cout << "\n";
+
+    cout << "Enter name for the reservation: ";
+    cin >> name;
+
+    nameL.push_back(name);
+
+    // Assign the next available room number
+    int room_number = roomNum.size() + 1;
+    roomNum.push_back(room_number);
+    reservations.push_back(name);
+
+    cout << "\n";
+    cout << name << " has been assigned room number: " << room_number << endl;
+    cout << "\n";
+}
+
+void cancel(vector<string>& nameL, vector<int>& roomNum, vector<string>& reservations) {
+    string close_name;
+    cout << "Cancel Reservation\n";
+    cout << "Enter the name of the reservation: ";
+    cin >> close_name;
+
+    // Find the index of the reservation name
+    auto it = find(nameL.begin(), nameL.end(), close_name);
+
+    if (it != nameL.end()) {
+        int index = distance(nameL.begin(), it);
+
+        // Erase elements at the found index from all vectors
+        nameL.erase(nameL.begin() + index);
+        roomNum.erase(roomNum.begin() + index);
+        reservations.erase(reservations.begin() + index);
+
+        cout << "Reservation for " << close_name << " has been cancelled." << endl;
+    } else {
+        cout << "No reservation found for the name: " << close_name << endl;
+    }
+}
+
+void check(const vector<string>& nameL, const vector<int>& roomNum, const vector<string>& reservations) {
+    cout << "Current Reservations:\n";
+    if (reservations.empty()) {
+        cout << "No reservations found." << endl;
+    } else {
+        for (size_t i = 0; i < reservations.size(); ++i) {
+            cout << "Name: " << reservations[i] << ", Room Number: " << roomNum[i] << endl;
+        }
+    }
+}
+
+int main() {
+    vector<string> nameL;
+    vector<int> roomNum;
+    vector<string> reservations;
+
+    while (true) {
+        int choice;
+        cout << "\nHotel Management System\n";
+        cout << "1. Book a room\n";
+        cout << "2. Cancel a reservation\n";
+        cout << "3. Check reservations\n";
+        cout << "4. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                book(nameL, roomNum, reservations);
+                break;
+            case 2:
+                cancel(nameL, roomNum, reservations);
+                break;
+            case 3:
+                check(nameL, roomNum, reservations);
+                break;
+            case 4:
+                cout << "Exiting the system. Goodbye!" << endl;
+                return 0;
+            default:
+                cout << "Invalid choice, please try again." << endl;
+        }
+    }
+
+    return 0;
+}
