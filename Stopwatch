@@ -1,0 +1,46 @@
+#include <iostream>
+#include <unistd.h> // this library let's us use the function sleep which freezes stuff in place
+
+
+using namespace std;
+
+void displayTime(int hours, int minutes, int seconds) {
+   // for linux
+   system("clear"); 
+
+   // for windows
+   // system("cls");
+
+   cout << hours << ":"
+        << minutes << ":"
+        << seconds << endl;
+}
+
+int main() {
+  int hour = 0;
+  int min = 0;
+  int sec = 0;
+
+  displayTime(hour, min, sec);
+
+  while(true) {
+    sleep(1);
+
+    sec++; //adds seconds by 1
+
+    if(sec > 59) { //stopwatch goes to minute section
+      min++;
+      sec = 0;
+   
+    } 
+
+    if(min > 59) { //stopwatch goes to hour section
+      hour++;
+      sec = 0;
+      min = 0;
+    }
+
+    displayTime(hour, min, sec);
+  }
+}
+// ctrl c to stop your timer :)
